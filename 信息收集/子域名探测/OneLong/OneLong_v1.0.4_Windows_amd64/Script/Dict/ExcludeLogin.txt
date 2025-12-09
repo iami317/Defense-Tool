@@ -1,0 +1,1 @@
+svg,css,eot,ttf,woff,jpg,png,jpeg,js,woff2,htm,gif,html,xml,swf,pdf,doc,xls,docx,xlsx.pptx,eml,json

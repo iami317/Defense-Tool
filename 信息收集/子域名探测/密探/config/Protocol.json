@@ -1,0 +1,12 @@
+[
+  {"port": "3306","protocol":"MYSQL","protocolName": "MYSQL"},
+  {"port": "1433","protocol":"SQLServer","protocolName":"SQLServer"},
+  {"port": "1521","protocol":"Oracle","protocolName":"Oracle"},
+  {"port": "27017","protocol":"MongoDB","protocolName":"MongoDB"},
+  {"port": "5432","protocol":"PostgreSQL","protocolName":"PostgreSQL"},
+  {"port": "5236","protocol":"DaMeng","protocolName":"达梦"},
+  {"port": "6379","protocol":"Redis","protocolName":"Redis"},
+  {"port": "22","protocol":"SSH","protocolName":"SSH"},
+  {"port": "21","protocol":"FTP","protocolName":"FTP"},
+  {"port": "1080","protocol":"Socks5","protocolName":"Socks5"}
+]

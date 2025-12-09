@@ -1,0 +1,11 @@
+admin
+root
+test
+sa
+manage
+sys
+system
+web
+www
+ftp
+user

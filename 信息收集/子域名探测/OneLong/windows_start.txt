@@ -1,0 +1,29 @@
+chcp 65001
+
+@echo off
+
+
+
+
+
+%~d0    %进入这个脚本执行的盘符%
+cd %~dp0   %进入这个脚本执行的目录%
+
+:: 查找并进入匹配的目录
+for /d %%d in (OneLong_v*_Windows_amd64) do (
+    cd %%d
+    goto :found
+)
+
+
+
+OneLong.exe -h
+
+
+@echo.
+@echo.
+@echo.
+@echo ******************************************************
+@echo 使用:  .\OneLong.exe -h
+@echo ******************************************************
+cmd

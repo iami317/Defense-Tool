@@ -1,0 +1,5 @@
+admin
+login
+system
+mail
+sso

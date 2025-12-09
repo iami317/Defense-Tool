@@ -1,0 +1,1 @@
+..\jdk1_8_0_291\bin\java -jar mitan-jar-with-dependencies.jar

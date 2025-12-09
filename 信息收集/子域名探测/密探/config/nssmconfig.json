@@ -1,0 +1,23 @@
+[
+    {"name":"IP","fofa":"ip=\"192.168.0.1\"","Hunter":"ip=\"192.168.0.1\"","Quake":"ip=\"192.168.0.1\"","ZoomEye":"ip=\"192.168.0.1\"","Zreo":"ip==192.168.0.1"},
+    {"name":"C段","fofa":"ip=\"192.168.0.1/24\"","Hunter":"ip=\"192.168.0.1/24\"","Quake":"ip=\"192.168.0.1/24\"","ZoomEye":"ip=\"192.168.0.1/24\"","Zreo":"<不支持>"},
+    {"name":"域名","fofa":"domain=\"google.com\"","Hunter":"domain=\"google.com\"","Quake":"domain=\"google.com\"","ZoomEye":"domain=\"google.com\"","Zreo":"domain==google.com"},
+    {"name":"HOST","fofa":"host=\"google.com\"","Hunter":"host=\"google.com\"","Quake":"host=\"google.com\"","ZoomEye":"host=\"google.com\"","Zreo":"host==google.com"},
+    {"name":"端口","fofa":"port=\"80\"","Hunter":"ip.port=\"80\"","Quake":"port=\"80\"","ZoomEye":"port=\"80\"","Zreo":"port==80"},
+    {"name":"title","fofa":"title=\"标题\"","Hunter":"web.title=\"标题\"","Quake":"response:\"标题\"","ZoomEye":"title=\"标题\"","Zreo":"title==标题"},
+    {"name":"body","fofa":"body=\"内容\"","Hunter":"web.body=\"内容\"","Quake":"response：\"内容\"","ZoomEye":"body=\"内容\"","Zreo":"body==内容"},
+    {"name":"OS","fofa":"os=\"centos\"","Hunter":"os=\"centos\"","Quake":"os:\"centos\"","ZoomEye":"os=\"centos\"","Zreo":"os==Centos"},
+    {"name":"app","fofa":"app=\"Nginx\"","Hunter":"app.name=\"Nginx\"","Quake":"app:\"Nginx\"","ZoomEye":"app=\"Nginx\"","Zreo":"component==Nginx"},
+    {"name":"country","fofa":"country=\"中国\"","Hunter":"ip.country=\"中国\"","Quake":"country_cn:\"中国\"","ZoomEye":"country.name=\"CN\"","Zreo":"country=CN"},
+    {"name":"Region","fofa":"region=\"山东\"","Hunter":"ip.province=\"山东\"","Quake":"province:\"山东\"","ZoomEye":"province.name=\"山东\"","Zreo":"province=山东"},
+    {"name":"city","fofa":"city=\"北京\"","Hunter":"ip.city=\"北京\"","Quake":"city=\"北京\"","ZoomEye":"city=\"北京\"","Zreo":"city=北京"},
+    {"name":"ICP","fofa":"icp=\"备案号\"","Hunter":"icp.number=\"备案号\"","Quake":"icp:\"备案号\"","ZoomEye":"<不支持>","Zreo":"icp==备案号"},
+    {"name":"protocol","fofa":"protocol=\"http\"","Hunter":"protocol=\"http\"","Quake":"service:\"ssh\"","ZoomEye":"service:\"ssh\"","Zreo":"service==http"},
+    {"name":"Icon","fofa":"icon_hash=\"mmh3\"","Hunter":"web.icon=\"MD5\"","Quake":"favicon:\"MD5\"","ZoomEye":"iconhash=\"MD5\"","Zreo":"icon=MD5"},
+    {"name":"isp","fofa":"isp=\"电信\"","Hunter":"isp.name=\"电信\"","Quake":"service.provider=\"China Education and Research Network\"","ZoomEye":"isp=\"电信\"","Zreo":"isp==电信"},
+    {"name":"header","fofa":"header=\"elastic\"","Hunter":"header=\"elastic\"","Quake":"headers:\"ThinkPHP\"","ZoomEye":"http.header=\"http\"","Zreo":"res_header==nginx"},
+    {"name":"cert","fofa":"cert=\"baidu\"","Hunter":"cert=\"baidu\"","Quake":"cert:\"360.cn\"","ZoomEye":"ssl.cert.fingerprint=\"F3C98F223D82CC41CF83D94671CCC6C69873FABF\"","Zreo":"<不支持>"},
+    {"name":"server","fofa":"server=\"IIS\"","Hunter":"header.server==\"IIS\"","Quake":"server:Nginx","ZoomEye":"http.header.server=\"Nginx\"","Zreo":"<不支持>"},
+    {"name":"banner","fofa":"banner=\"users\"","Hunter":"protocol.banner=\"nginx\"","Quake":"<不支持>","ZoomEye":"banner=\"FTP\"","Zreo":"banner==零零信安"},
+    {"name":"status_code","fofa":"status_code=\"200\"","Hunter":"header.status_code=\"200\"","Quake":"status_code:200","ZoomEye":"http.header.status_code=\"200\"","Zreo":"status_code=200"}
+]

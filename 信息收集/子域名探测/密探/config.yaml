@@ -1,0 +1,93 @@
+finger:
+  threadsleep: '0'
+  filterstatus: 'true'
+  threadcount: '24'
+Cookie:
+  chinazcookie: bbsmax_user=51f3b69b-0afb-28ff-eaab-632e3349fd28;toolUserGrade=528B603580019D1A30848B07193AD365C70537CFB7BA0484700A4311E54A14B52A6B00F559A550763D75E5EF96B494A3366BC6F6CF862ABA078AD0656E4AB67F0404FC53449F8B3B0B4129A926DEBC8D9D1BD825CF1ED61C7B4D2381E8BD40C48C40AED0F1F2A9BD5D8B678CD4D6E14CB6AE2C5F3147A53E9DAF1212FEA6AFDFD1071CAC651A5A023A8047AEDFCCE83C872B49C600BC7C25F2098510AA3BA429D0052906E46DD81384A20604D2BF2A63BB7BED7E1E162C590EB88CAA1BA2E2A2;
+  fengniaocookie: ''
+  aizhancookie: userId=1500000;
+note:
+  dirpath: /Volumes/data/SRC/javaTools/mitan/note
+dirsearch:
+  filterlength: 0.0,0.01-0.60
+  threadsleep: '4'
+  bypass403: 'false'
+  ScanStatus: '[302, 403, 200, 502, 404, 401, 301]'
+  isfilterkeyword: 'false'
+  threadcount: '24'
+  isfilterlength: 'true'
+  domainbakfile: 'false'
+  fileExt: php
+  waf: 'true'
+  filterkeyword: 404,Not Found,页面不存在,拦截
+uiMode:
+  uiMode: '2'
+scanport:
+  ipalive: 'true'
+  threadsleep: '10'
+  threadcount: '36'
+nssm:
+  NssmType: FOFA
+  loadnearyear: 'true'
+  defaultLoadPage: '1.0'
+SensitiveInfo:
+  threadsleep: '1'
+  isfilter: 'false'
+  mothod: 'true'
+  threadcount: '3'
+  apifilter: delete,save,update,del
+  isautoScan: 'true'
+zoomeye:
+  maxsize: '10000'
+  key: ''
+proxy:
+  password: ''
+  port: '7890'
+  proxytype: HTTP
+  ip: 127.0.0.1
+  isrun: '0'
+  username: ''
+fofa:
+  pagesize: '100'
+  maxsize: '10000'
+  url: https://fofa.info
+  email: ''
+  key: ''
+nssmproxy:
+  password: ''
+  port: '8080'
+  proxytype: HTTP
+  ip: 127.0.0.1
+  isrun: '0'
+  username: ''
+ApiScan:
+  threadsleep: '9'
+  isfilter: 'false'
+  mothod: 'true'
+  threadcount: '19'
+  apifilter: save,delete,update,del,add
+  isautoScan: 'false'
+quake:
+  pagesize: '500'
+  maxsize: '10000'
+  key: ''
+subdomain:
+  threadsleep: '9'
+  depth: '1'
+  scanport: 80,43
+  isfjx: 'false'
+  dnshost: '0'
+  threadcount: '24'
+  filterip: 127.0.0.1
+  isscanport: 'true'
+zerokey:
+  maxsize: '10000'
+  key: ''
+hunter:
+  pagesize: '100'
+  index: '1'
+  maxsize: '10000'
+  key: ''
+mutilsearch:
+  threadsleep: '9'
+  threadcount: '4'
