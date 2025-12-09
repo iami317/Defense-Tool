@@ -1,0 +1,10 @@
+
+*.xml
+*.iml
+*.pyc
+results/
+logs/
+.idea/
+url.txt
+config/conf.py
+config/conf.py
