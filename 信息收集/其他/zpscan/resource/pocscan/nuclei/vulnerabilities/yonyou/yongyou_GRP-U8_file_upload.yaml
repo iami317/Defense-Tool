@@ -1,0 +1,19 @@
+id: yongyou-GRP-U8-file-upload
+
+info:
+  name: yongyou_GRP-U8_file_upload
+  author: A10ng_
+  severity: high
+  reference: 2022HW
+  tags: upload
+  tags: fileupload,yonyou,yongyou-grp-u8
+requests:
+  - raw:
+      - |
+        GET /UploadFileData HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers:
+      - type: status
+        status:
+          - 200

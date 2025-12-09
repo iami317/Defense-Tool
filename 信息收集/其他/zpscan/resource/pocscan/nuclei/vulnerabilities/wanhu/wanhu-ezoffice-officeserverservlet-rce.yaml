@@ -1,0 +1,26 @@
+id: wanhu-ezoffice-officeserverservlet-rce
+
+info:
+  name: Wanhu Ezoffice RCE
+  author: zp857
+  severity: critical
+  description: A RCE in Wanhu Ezoffice.
+  tags: wanhu-ezoffice,rce
+  metadata:
+    fofa-query: 'app="万户网络-ezOFFICE"'
+
+requests:
+  - raw:
+      - |
+        GET /defaultroot/officeserverservlet HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "DBSTEP V3.0"
+
+      - type: status
+        status:
+          - 200

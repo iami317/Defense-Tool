@@ -1,0 +1,27 @@
+id: seeyon-oa-a6-info-leak
+
+info:
+  name: Seeyon OA A6 Info Leak
+  author: zp857
+  severity: info
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/hx1eyd
+  tags: seeyon-oa,leak
+  metadata:
+    fofa-query: 'body="致远协创A6"'
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/yyoa/assess/js/initDataAssess.jsp"
+      - "{{BaseURL}}/yyoa/createMysql.jsp"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "personList"
+          - "root"
+
+      - type: status
+        status:
+          - 200

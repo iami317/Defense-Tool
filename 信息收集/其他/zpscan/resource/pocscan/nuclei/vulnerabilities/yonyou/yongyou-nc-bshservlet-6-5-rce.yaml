@@ -1,0 +1,25 @@
+id: yongyou-nc-bshservlet-6-5-rce
+
+info:
+  name: Yongyou NC 6.5 RCE
+  author: zp857
+  severity: high
+  tags: yongyou-nc,rce
+  metadata:
+    fofa-query: 'body="UClient" || body="用友" || body="YONYOU" || body="img/logo_small.ico" || body="产品登录界面" || body="ufida_nc.png"'
+
+requests:
+  - raw:
+      - |
+        GET /servlet/~ic/bsh.servlet.BshServlet HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        words:
+          - "BeanShell"

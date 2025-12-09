@@ -1,0 +1,24 @@
+id: dahua-dss-unauthorized
+
+info:
+  name: Dahua Dss Unauthorized
+  author: zp857
+  severity: high
+  tags: dss,unauth,dahua-dss
+  metadata:
+    fofa-query: 'title="DSS-平安城市"'
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/config/user_initPasswordReset.action"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "newLoginName"
+
+      - type: status
+        status:
+          - 200

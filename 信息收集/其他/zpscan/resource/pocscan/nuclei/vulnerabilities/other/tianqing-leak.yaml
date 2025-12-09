@@ -1,0 +1,36 @@
+id: tianqing-info-leak
+
+info:
+  name: Tianqing Info Leak
+  author: zp857
+  severity: medium
+  reference:
+    - https://mp.weixin.qq.com/s/wH5luLISE_G381W2ssv93g
+  tags: tianqing,exposure,360-tianqing
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/api/dbstat/gettablessize"
+      - "{{BaseURL}}/tools/cert/info"
+      - "{{BaseURL}}/api/client/ClientList?t=1&limit=1000&sign=720500a7a69ac96b140d2739aa92a65e"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "schema_name"
+          - "table_name"
+          - "table_size"
+          - "success"
+        condition: or
+
+      - type: word
+        part: header
+        words:
+          - "application/json"
+
+      - type: status
+        status:
+          - 200

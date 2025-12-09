@@ -1,0 +1,32 @@
+id: yongyou-nc-unserialize-rce
+
+info:
+  name: Yongyou NC Unserialize RCE
+  author: zp857
+  severity: high
+  tags: yongyou-nc,rce
+  metadata:
+    fofa-query: 'body="UClient" || body="用友" || body="YONYOU" || body="img/logo_small.ico" || body="产品登录界面" || body="ufida_nc.png"'
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/service/monitorservlet"
+
+      - "{{BaseURL}}/servlet/~uapxbrl/uap.xbrl.persistenceImpl.XbrlPersistenceServlet"
+
+      - "{{BaseURL}}/service/mxservlet"
+      - "{{BaseURL}}/servlet/~ic/nc.bs.framework.mx.MxServlet"
+
+      - "{{BaseURL}}/servlet/~ic/com.ufida.zior.console.ActionHandlerServlet"
+
+      - "{{BaseURL}}/servlet/~ic/nc.document.pub.fileSystem.servlet.DownloadServlet"
+      - "{{BaseURL}}/servlet/~ic/nc.document.pub.fileSystem.servlet.DeleteServlet"
+      - "{{BaseURL}}/servlet/~ufofr/DeleteServlet"
+      - "{{BaseURL}}/servlet/~ic/nc.document.pub.fileSystem.servlet.UploadServlet"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200

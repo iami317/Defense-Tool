@@ -1,0 +1,21 @@
+id: yongyou-cloud-sqli
+
+info:
+  name: Yongyou Cloud Sqli
+  author: zp857
+  severity: critical
+  tags: yongyou-cloud,sqli
+  metadata:
+    fofa-query: 'app="用友-NC-Cloud"'
+
+requests:
+  - raw:
+      - |
+        GET /fs/console?username=123&password=1 HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 500

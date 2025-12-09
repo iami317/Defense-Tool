@@ -1,0 +1,20 @@
+id: qizhi-fortres-rce
+
+info:
+  name: Qizhi Fortres RCE
+  author: zp857
+  severity: high
+  tags: qizhi,rce,qizhi-fortress
+  metadata:
+    fofa-query: 'app="齐治科技-堡垒机"'
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/ha_request.php"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200

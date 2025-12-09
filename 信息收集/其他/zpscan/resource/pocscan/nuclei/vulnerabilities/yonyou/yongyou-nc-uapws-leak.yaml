@@ -1,0 +1,26 @@
+id: yongyou-nc-uapws-leak
+
+info:
+  name: Yongyou NC Leak
+  author: zp857
+  severity: low
+  tags: yongyou-nc,leak
+  metadata:
+    fofa-query: 'body="UClient" || body="用友" || body="YONYOU" || body="img/logo_small.ico" || body="产品登录界面" || body="ufida_nc.png"'
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/uapws"
+      - "{{BaseURL}}/uapws/service/"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "Password"
+          - "ServicePort"
+
+      - type: status
+        status:
+          - 200

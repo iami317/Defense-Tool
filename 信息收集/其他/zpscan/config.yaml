@@ -1,0 +1,45 @@
+domainscan:
+  subdomain-file: resource/domainscan/subdomain.txt
+  subnext-file: resource/domainscan/subnext.txt
+  cdn-cname-file: resource/domainscan/cdn_cname.txt
+  cdn-ip-file: resource/domainscan/cdn_ip.txt
+  provider-file: resource/domainscan/provider.yaml
+  fofa-email: xxx
+  fofa-key: xxx
+ipscan:
+  qqwry-file: resource/ipscan/qqwry.dat
+  nmap-file: resource/ipscan/nmap.txt
+crack:
+  common-file: resource/crack/common.txt
+  template-file: resource/crack/template.txt
+  user-map: { 'ftp': ['ftp'],
+               'ssh': ['root'],
+               'wmi': ['administrator'],
+               'wmihash': ['administrator'],
+               'smb': ['administrator'],
+               'mssql': ['sa'],
+               'oracle': ['oracle', 'system'],
+               'mysql': ['root'],
+               'rdp': ['administrator'],
+               'postgres': ['postgres','admin'],
+               'redis': [''],
+               'memcached': [''],
+               'mongodb': ['admin','root'],
+  }
+webscan:
+  finger-file: resource/webscan/fingers.json
+  update-url: 
+dirscan:
+  backup-file: resource/dirscan/backup.txt
+  catalog-file: resource/dirscan/catalog.txt
+  api-file: resource/dirscan/api.txt
+  leak-file: resource/dirscan/leak.txt
+  vuln-file: resource/dirscan/vuln.txt
+  common-file: resource/dirscan/common.txt
+  backup-suffix: ['zip','7z','rar','tar','txt','tar.gz','tar.bz2','tgz','bak','old','swp','jar','war','sql']
+pocscan:
+  goby-poc-dir: resource/pocscan/goby
+  xray-poc-dir: resource/pocscan/xray
+  nuclei-poc-dir: resource/pocscan/nuclei
+expscan:
+  nuclei-exp-dir: resource/pocscan/nuclei

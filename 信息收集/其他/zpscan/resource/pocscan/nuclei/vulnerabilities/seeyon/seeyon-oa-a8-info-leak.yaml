@@ -1,0 +1,28 @@
+id: seeyon-oa-a8-info-leak
+
+info:
+  name: Seeyon OA A8 info Leak
+  author: zp857
+  description: A default pass in Seeyon OA A8, password isWLCCYBD@SEEYON
+  severity: info
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/hx1eyd
+  tags: seeyon-oa,leak
+  metadata:
+    fofa-query: '"致远A8"'
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/seeyon/management/index.jsp"
+      - "{{BaseURL}}/seeyon/management/status.jsp"
+      - "{{BaseURL}}/management/index.jsp"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "Password"
+
+      - type: status
+        status:
+          - 200

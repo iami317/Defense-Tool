@@ -1,0 +1,7 @@
+/index
+/login
+/admin
+/Admin
+/upload
+/test
+/info

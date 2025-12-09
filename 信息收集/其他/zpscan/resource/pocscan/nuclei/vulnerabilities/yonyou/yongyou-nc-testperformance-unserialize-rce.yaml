@@ -1,0 +1,24 @@
+id: yongyou-nc-testperformance-unserialize-rce
+
+info:
+  name: Yongyou NC Unserialize RCE
+  author: zp857
+  severity: high
+  tags: yongyou-nc,rce
+  metadata:
+    fofa-query: 'body="UClient" || body="用友" || body="YONYOU" || body="img/logo_small.ico" || body="产品登录界面" || body="ufida_nc.png"'
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/testperformance.jsp"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "memory"
+
+      - type: status
+        status:
+          - 200

