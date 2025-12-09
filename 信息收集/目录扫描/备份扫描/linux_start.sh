@@ -1,0 +1,1 @@
+konsole -e bash -c 'python3 ihoneyBakFileScan_Modify.py -h ; echo ; echo ----------------------------------------; echo 使用:  python3 ihoneyBakFileScan_Modify.py -h; echo ---------------------------------------- ; exec /bin/zsh '
